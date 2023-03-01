@@ -3,12 +3,8 @@ project:
   output-dir: docs
 
 website:
-  title: "Shifting AI controversies Workshop"
+  title: "Shifting AI controversies - Workshop"
   search: false
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
 
 format:
   html:

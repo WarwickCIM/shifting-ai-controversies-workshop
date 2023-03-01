@@ -1,7 +1,9 @@
 ---
-title: "shifting-ai-controversies"
+title: "Shifting AI controversies - Workshop"
 ---
 
-This is a Quarto website.
+To capture the ‘shape’ of selected AI controversies we collected and analysed relevant tweets. Here we detail our data collection and analysis processes.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+# Data Collection
+
+Details forthcoming.

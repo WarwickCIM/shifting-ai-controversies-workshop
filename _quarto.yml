@@ -2,12 +2,12 @@ project:
   type: website
 
 website:
-  title: "shifting-ai-controversies"
+  title: "Shifting AI controversies Workshop"
+  search: false
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
 
 format:
   html:

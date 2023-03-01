@@ -6,4 +6,16 @@ To capture the ‘shape’ of selected AI controversies we collected and analyse
 
 # Data Collection
 
-Details forthcoming.
+tbc
+
+# Analysis
+
+tbc
+
+## Reply chains
+
+tbc
+
+## BERTopic
+
+tbc

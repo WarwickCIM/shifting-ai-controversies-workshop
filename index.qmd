@@ -6,16 +6,66 @@ To capture the ‘shape’ of selected AI controversies we collected and analyse
 
 # Data Collection
 
-tbc
+We collected Tweets using the Twitter Academic Research API. The API provided unprecedented access to the entire Twitter archive and rich information about tweets. However, this API is due to be discontinued following Elon Musk’s acquisition of Twitter.
+
+Our approach was query based. Queries were sent to Twitter using the Python programming language. Our script collected all the tweets matching the query from the Twitter archive and the conversations these tweets were part of. Each dataset is made up of multiple queries. Example queries are shown below.
+
+| Dataset           | Example query                                                                                                                          | Start      | End        |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------|------------|------------|
+| Stochastic Parrot | stochastic parrots OR "🦜 paper"                                                                                                        | 01/10/2020 | 18/01/2022 |
+| Gaydar            | url:"https://psyarxiv.com/hv28a/" OR url:"https://psycnet.apa.org/doiLanding?doi=10.1037%2Fpspa0000098"                                | 01/07/2017 | 18/01/2022 |
+| Compas            | compas propublica                                                                                                                      | 01/09/2015 | 18/01/2022 |
+| NHS and Deepmind  | url:"https://link.springer.com/article/10.1007/s12553-017-0179-1" OR url:"https://link.springer.com/article/10.1007/s12553-018-0229-3" | 01/09/2016 | 18/01/2022 |
+| ML/AI Solution    | neural (symbolic OR symbols)                                                                                                           | 01/01/2012 | 23/06/2022 |
+
+To support our data analysis the tweets were stored in a database. We downloaded many GBs of text files containing the tweets. Parsing through these with a Python script was inefficient. To speed up our analysis a script read in each text file, extracted fields of interest (e.g.., tweet text, created at, author name) and stored that information in a simple database table, as shown below with data fields removed.
+
+|     retrieved_at    | api_endpoint |              query              |      created_at     | conversation_id | tweet_id | ... |
+|:-------------------:|:------------:|:-------------------------------:|:-------------------:|:---------------:|:--------:|-----|
+| 2022-05-04 13:06:06 | /2/tweets    | stochastic parrots OR "🦜 paper" | 2017-08-07 09:57:29 |                 |          | ... |
 
 # Analysis
 
-tbc
+For each of the 5 selected controversies, our team identified which conversations were in scope, maybe in scope, out of scope (i.e. the conversation addresses the friction object in case of research aspects of the associated topic),
+
+Excel files were created containing all the tweets for a query. These files were generated using a Python script which queried our tweet database. If datasets were over 100,000 rows then the tweets were split into multiple excel files. From these files, we identified a list of relevant conversation IDs for each dataset.
+
+Our automated analysis created several outputs from the relevant conversation IDs. A script extracted the tweets for each conversation from the database. These tweets were written to (a) an Excel file ordered by conversation ID and creation date and a text representation of reply chains.
 
 ## Reply chains
 
-tbc
+In Twitter conversations people reply to one another. The data from the Twitter API include information on who replied to whom. We wrote a script to create a tree representation of these reply chains.
+
+From the reply chain we counted the number of paths from root of the tree to the end of each branch (the width) and the number of tweets from the root to the end of the longest branch (the depth). For instance, the below reply chain has a width of 7 and a depth of 1.
+
+```
+Jake Snow (1022455448098631680)
+├── Eda Seyhan (1022769857081876481)
+├── Fritz Mills (1022760736660107270)
+├── Jeffrey Jay Blatt (1022799024984809473)
+├── LKMeyer (1022640021046624256)
+├── Paul D (1022507889972273152)
+├── Tesla Union Organizer (1022658495429181440)
+├── karl (1022517996273721344)
+└── 🌎 Liberty 42 🇺🇦 (1022518923181416448)
+```
 
 ## BERTopic
 
-tbc
+Automatic extraction of topics was carried out using the [BERTopic python module](https://maartengr.github.io/BERTopic/index.html). The approach allows us to leverage the [SBERT model](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2). Full details are available from the paper ([Grootendorst, 2022](https://arxiv.org/abs/2203.05794)).
+
+## Twitter Actor Classification
+
+A random sample of 1000 Twitter actors (i.e. users) was classified for each controversy based on their bios. The [Text-davinci-003](https://platform.openai.com/docs/models/overview) model was used to perform the task. It did not receive any human labelled data or fine-tuning. The following text was used to prompt an answer:
+
+```zero_shot_prompt = '''You are a data expert working for a top research University. You are 	analysing twitter biography strings (also known as 'bios') in order to determine the profession and/or field of each individual and classify them into one of several categories. The different categories are: humanities, scientist, engineer, media, activism, professions, industry, research, tech industry, and hybrid. You should use hybrid when the individual is best described as a combination of the categories listed above. Make sure you write out all categories in lowercase and do not make any spelling errors! Also make sure you only choose the single best category that represents the individual. Do not include any punctuation in your classification label, such as periods or quotation marks. If you can't tell what it is, write: 'Could not classify'.```
+
+```Example: Twitter Bio: TWITTER_BIO```
+
+```The classification is:'''```
+
+The output was then post-processed in R to:
+
+1. remove dots and commas at the of the string;
+
+2. recategorise “creative” categories generated by the model. For example, multiple categories, such as “Scientist, Research, Tech” were recategorised to “Hybrid” to fit categories listed in the prompt;

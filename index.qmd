@@ -50,6 +50,10 @@ Jake Snow (1022455448098631680)
 └── 🌎 Liberty 42 🇺🇦 (1022518923181416448)
 ```
 
+## Manual Topic Modelling — Topic Similarity on Conversation level Visualisation 
+
+Conversations are displayed in the space according to their topic similarity. Their precise origin position (which correspond to the left corner on the top in each square) results from a Classical Multidimensional Scaling (MDS), a mathematical means of visualizing the level of similarity of individual cases of a dataset. Starting from a distance matrix originated from conversations and topics. Conversations are then positioned in the space according to their combination of topics.  
+
 ## BERTopic
 
 Automatic extraction of topics was carried out using the [BERTopic python module](https://maartengr.github.io/BERTopic/index.html). The approach allows us to leverage the [SBERT model](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2). Full details are available from the paper ([Grootendorst, 2022](https://arxiv.org/abs/2203.05794)).

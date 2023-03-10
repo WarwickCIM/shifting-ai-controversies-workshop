@@ -147,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>To support our data analysis the tweets were stored in a database. We downloaded many GBs of text files containing the tweets. Parsing through these with a Python script was inefficient. To speed up our analysis a script read in each text file, extracted fields of interest (e.g.., tweet text, created at, author name) and stored that information in a simple database table, as shown below with data fields removed.</p>
+<p>To support our data analysis the tweets were stored in a database. We downloaded many GBs of text files containing the tweets. Parsing through these with a Python script was inefficient. To speed up our analysis a script read in each text file, extracted fields of interest (e.g.., tweet text, created at, author name) and stored that information in a simple database table, part of which is shown below with the data fields removed.</p>
 <table class="table">
 <colgroup>
 <col style="width: 17%">
@@ -181,12 +181,12 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+<p>To support out analysis, all of the tweets for each controversy were extracted from the database into Excel files using Python script. If datasets were over 100,000 rows then the tweets were split into multiple excel files.</p>
 </section>
 <section id="analysis" class="level1">
 <h1>Analysis</h1>
-<p>For each of the 5 selected controversies, our team identified which conversations were in scope, maybe in scope, out of scope (i.e.&nbsp;the conversation addresses the friction object in case of research aspects of the associated topic),</p>
-<p>Excel files were created containing all the tweets for a query. These files were generated using a Python script which queried our tweet database. If datasets were over 100,000 rows then the tweets were split into multiple excel files. From these files, we identified a list of relevant conversation IDs for each dataset.</p>
-<p>Our automated analysis created several outputs from the relevant conversation IDs. A script extracted the tweets for each conversation from the database. These tweets were written to (a) an Excel file ordered by conversation ID and creation date and a text representation of reply chains.</p>
+<p>For each of the 5 selected controversies, our team identified which conversations were in scope, maybe in scope, out of scope (i.e.&nbsp;the conversation addresses the friction object in case of research aspects of the associated topic).</p>
+<p>Our automated analysis created several outputs from the relevant conversation IDs. A script extracted the tweets for each conversation from the database. These tweets were written to (a) an Excel file ordered by conversation ID and creation date, (b) a text representation of reply chains and (c) a list of actor descriptions for each query.</p>
 <section id="reply-chains" class="level2">
 <h2 class="anchored" data-anchor-id="reply-chains">Reply chains</h2>
 <p>In Twitter conversations people reply to one another. The data from the Twitter API include information on who replied to whom. We wrote a script to create a tree representation of these reply chains.</p>

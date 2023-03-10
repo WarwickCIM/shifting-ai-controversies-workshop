@@ -18,19 +18,19 @@ Our approach was query based. Queries were sent to Twitter using the Python prog
 | NHS and Deepmind  | url:"https://link.springer.com/article/10.1007/s12553-017-0179-1" OR url:"https://link.springer.com/article/10.1007/s12553-018-0229-3" | 01/09/2016 | 18/01/2022 |
 | ML/AI Solution    | neural (symbolic OR symbols)                                                                                                           | 01/01/2012 | 23/06/2022 |
 
-To support our data analysis the tweets were stored in a database. We downloaded many GBs of text files containing the tweets. Parsing through these with a Python script was inefficient. To speed up our analysis a script read in each text file, extracted fields of interest (e.g.., tweet text, created at, author name) and stored that information in a simple database table, as shown below with data fields removed.
+To support our data analysis the tweets were stored in a database. We downloaded many GBs of text files containing the tweets. Parsing through these with a Python script was inefficient. To speed up our analysis a script read in each text file, extracted fields of interest (e.g.., tweet text, created at, author name) and stored that information in a simple database table, part of which is shown below with the data fields removed.
 
 |     retrieved_at    | api_endpoint |              query              |      created_at     | conversation_id | tweet_id | ... |
 |:-------------------:|:------------:|:-------------------------------:|:-------------------:|:---------------:|:--------:|-----|
 | 2022-05-04 13:06:06 | /2/tweets    | stochastic parrots OR "🦜 paper" | 2017-08-07 09:57:29 |                 |          | ... |
 
+To support out analysis, all of the tweets for each controversy were extracted from the database into Excel files using Python script. If datasets were over 100,000 rows then the tweets were split into multiple excel files. 
+
 # Analysis
 
-For each of the 5 selected controversies, our team identified which conversations were in scope, maybe in scope, out of scope (i.e. the conversation addresses the friction object in case of research aspects of the associated topic),
+For each of the 5 selected controversies, our team identified which conversations were in scope, maybe in scope, out of scope (i.e. the conversation addresses the friction object in case of research aspects of the associated topic). 
 
-Excel files were created containing all the tweets for a query. These files were generated using a Python script which queried our tweet database. If datasets were over 100,000 rows then the tweets were split into multiple excel files. From these files, we identified a list of relevant conversation IDs for each dataset.
-
-Our automated analysis created several outputs from the relevant conversation IDs. A script extracted the tweets for each conversation from the database. These tweets were written to (a) an Excel file ordered by conversation ID and creation date and a text representation of reply chains.
+Our automated analysis created several outputs from the relevant conversation IDs. A script extracted the tweets for each conversation from the database. These tweets were written to (a) an Excel file ordered by conversation ID and creation date, (b) a text representation of reply chains and (c) a list of actor descriptions for each query.
 
 ## Reply chains
 

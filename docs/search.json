@@ -2,35 +2,35 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Shifting AI controversies - Workshop",
+    "title": "Twitter analysis of selected AI controversies: methods of data collection, analysis and visualisation",
     "section": "",
-    "text": "To capture the ‘shape’ of selected AI controversies we collected and analysed relevant tweets. Here we detail our data collection and analysis processes."
+    "text": "Shaping AI, University of Warwick\nMarch 2023\nTo capture the ‘shape’ of selected AI controversies we collected and analysed relevant tweets. Here we detail our data collection and analysis processes."
   },
   {
     "objectID": "index.html#reply-chains",
     "href": "index.html#reply-chains",
-    "title": "Shifting AI controversies - Workshop",
+    "title": "Twitter analysis of selected AI controversies: methods of data collection, analysis and visualisation",
     "section": "Reply chains",
     "text": "Reply chains\nIn Twitter conversations people reply to one another. The data from the Twitter API include information on who replied to whom. We wrote a script to create a tree representation of these reply chains.\nFrom the reply chain we counted the number of paths from root of the tree to the end of each branch (the width) and the number of tweets from the root to the end of the longest branch (the depth). For instance, the below reply chain has a width of 7 and a depth of 1.\nJake Snow (1022455448098631680)\n├── Eda Seyhan (1022769857081876481)\n├── Fritz Mills (1022760736660107270)\n├── Jeffrey Jay Blatt (1022799024984809473)\n├── LKMeyer (1022640021046624256)\n├── Paul D (1022507889972273152)\n├── Tesla Union Organizer (1022658495429181440)\n├── karl (1022517996273721344)\n└── 🌎 Liberty 42 🇺🇦 (1022518923181416448)"
   },
   {
     "objectID": "index.html#manual-topic-modelling-topic-similarity-on-conversation-level-visualisation",
     "href": "index.html#manual-topic-modelling-topic-similarity-on-conversation-level-visualisation",
-    "title": "Shifting AI controversies - Workshop",
+    "title": "Twitter analysis of selected AI controversies: methods of data collection, analysis and visualisation",
     "section": "Manual Topic Modelling — Topic Similarity on Conversation level Visualisation",
     "text": "Manual Topic Modelling — Topic Similarity on Conversation level Visualisation\nConversations are displayed in the space according to their topic similarity. Their precise origin position (which correspond to the left corner on the top in each square) results from a Classical Multidimensional Scaling (MDS), a mathematical means of visualizing the level of similarity of individual cases of a dataset. Starting from a distance matrix originated from conversations and topics. Conversations are then positioned in the space according to their combination of topics."
   },
   {
     "objectID": "index.html#bertopic",
     "href": "index.html#bertopic",
-    "title": "Shifting AI controversies - Workshop",
+    "title": "Twitter analysis of selected AI controversies: methods of data collection, analysis and visualisation",
     "section": "BERTopic",
     "text": "BERTopic\nAutomatic extraction of topics was carried out using the BERTopic python module. The approach allows us to leverage the SBERT model. Full details are available from the paper (Grootendorst, 2022)."
   },
   {
     "objectID": "index.html#twitter-actor-classification",
     "href": "index.html#twitter-actor-classification",
-    "title": "Shifting AI controversies - Workshop",
+    "title": "Twitter analysis of selected AI controversies: methods of data collection, analysis and visualisation",
     "section": "Twitter Actor Classification",
     "text": "Twitter Actor Classification\nA random sample of 1000 Twitter actors (i.e. users) was classified for each controversy based on their bios. The Text-davinci-003 model was used to perform the task. It did not receive any human labelled data or fine-tuning. The following text was used to prompt an answer:\nzero_shot_prompt = '''You are a data expert working for a top research University. You are   analysing twitter biography strings (also known as 'bios') in order to determine the profession and/or field of each individual and classify them into one of several categories. The different categories are: humanities, scientist, engineer, media, activism, professions, industry, research, tech industry, and hybrid. You should use hybrid when the individual is best described as a combination of the categories listed above. Make sure you write out all categories in lowercase and do not make any spelling errors! Also make sure you only choose the single best category that represents the individual. Do not include any punctuation in your classification label, such as periods or quotation marks. If you can't tell what it is, write: 'Could not classify'.\nExample: Twitter Bio: TWITTER_BIO\nThe classification is:'''\nThe output was then post-processed in R to:\n\nremove dots and commas at the of the string;\nrecategorise “creative” categories generated by the model. For example, multiple categories, such as “Scientist, Research, Tech” were recategorised to “Hybrid” to fit categories listed in the prompt;"
   }

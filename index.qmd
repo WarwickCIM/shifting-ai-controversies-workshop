@@ -1,6 +1,10 @@
 ---
-title: "Shifting AI controversies - Workshop"
+title: "Twitter analysis of selected AI controversies: methods of data collection, analysis and visualisation"
 ---
+
+[Shaping AI](https://www.shapingai.org/), University of Warwick
+
+March 2023
 
 To capture the ‘shape’ of selected AI controversies we collected and analysed relevant tweets. Here we detail our data collection and analysis processes.
 
